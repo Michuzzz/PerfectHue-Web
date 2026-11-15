@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerfectHue | Your Perfect Foundation Match</title>
+<meta name="description" content="Explore foundation shades that complement your skin tone with browser-based image analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+  <a href="#home" class="brand"><span class="brand-icon">✧</span><span>PerfectHue</span></a>
+  <nav><a href="#home">Home</a><a href="#how-it-works">How It Works</a><a href="#matcher">Find Your Shade</a></nav>
+</header>
+<main>
+<section class="hero" id="home">
+ <div class="hero-content">
+  <p class="eyebrow">✧ BEAUTY MEETS TECHNOLOGY ✧</p>
+  <h1>Discover the shade<br>that feels like <em>you.</em></h1>
+  <p class="hero-description">Your skin is unique. Your foundation should be too. Discover personalised foundation recommendations through image-based skin tone analysis.</p>
+  <a href="#matcher" class="primary-button">Discover Your Match <span>→</span></a>
+  <p class="hero-note">A personalised beauty experience, made for you.</p>
+ </div>
+ <div class="hero-visual"><div class="hero-image-card">
+  <img src="images/beauty-hero.png" alt="Foundation, makeup and beauty collection">
+  <div class="image-caption"><span>YOUR BEAUTY, YOUR SHADE</span><span>✧</span></div>
+ </div></div>
+</section>
+
+<section class="matcher-section" id="matcher">
+ <div class="section-heading">
+  <p class="eyebrow">✧ YOUR PERSONAL SHADE FINDER ✧</p>
+  <h2>Let's find your perfect match</h2>
+  <p>Upload a clear, front-facing photograph and let us explore shades that complement your skin.</p>
+ </div>
+ <div class="upload-card">
+  <div class="upload-icon">✧</div>
+  <h3>Upload your photograph</h3>
+  <p>Choose a clear, front-facing photograph in natural lighting for better analysis.</p>
+  <form id="uploadForm">
+   <label for="imageUpload" class="upload-area" tabindex="0">
+    <span class="upload-symbol">＋</span><strong>Choose an image</strong>
+    <span>or drag and drop your photograph here</span><small>PNG, JPG or JPEG</small>
+   </label>
+   <input type="file" id="imageUpload" accept="image/png,image/jpeg" required>
+   <div id="fileName" class="file-name">No image selected</div>
+   <button type="submit" class="primary-button upload-button" id="submitButton">Find My Foundation Match →</button>
+  </form>
+  <div class="loading-spinner" id="loadingSpinner"><div class="spinner"></div><p>Analysing your skin tone...</p></div>
+  <p class="privacy-note">✧ Your photograph is analysed locally in your browser; it is not uploaded to a server.</p>
+  <div id="statusMessage" class="result-message" role="status" style="display:none"></div>
+ </div>
+</section>
+
+<section class="results-section" id="results">
+ <p class="eyebrow">✧ YOUR PHOTOGRAPH ✧</p><h2>Your uploaded photograph</h2>
+ <img class="uploaded-preview" id="uploadedPreview" alt="Your selected photograph">
+</section>
+<section class="analysis-section" id="analysisSection" style="display:none">
+ <p class="eyebrow">✧ YOUR SKIN ANALYSIS ✧</p><h2>A little more about your skin</h2>
+ <div class="analysis-card">
+  <div class="color-swatch" id="skinSwatch"></div>
+  <div class="analysis-details">
+   <p>Detected skin colour</p><h3 id="skinHex">—</h3>
+   <p>RGB: <span id="skinRgb">—</span></p>
+   <p>Estimated undertone: <span class="undertone-result" id="undertone">—</span></p>
+   <p class="undertone-note">This is an image-based estimate. Lighting, makeup and camera settings may affect the result. Please use it as a starting point and test foundation in person when possible.</p>
+  </div>
+ </div>
+</section>
+<section class="recommendations-section" id="recommendationsSection" style="display:none">
+ <p class="eyebrow">✧ CURATED FOR YOUR SKIN TONE ✧</p><h2>Your closest foundation matches</h2>
+ <p>Explore the foundation shades closest to your detected skin colour.</p>
+ <div class="shade-list" id="shadeList"></div>
+ <div class="download-area">
+  <p class="eyebrow">✧ KEEP YOUR RESULTS ✧</p><h2>Take Your PerfectHue Report With You</h2>
+  <p>Your personalised report contains your uploaded photograph, detected skin colour, estimated undertone and three foundation recommendations.</p>
+  <button class="download-button" id="downloadReport">↓ Download My Results (PDF)</button>
+  <p class="download-note">One PDF report generated in your browser.</p>
+ </div>
+ <div class="result-toolbar"><button class="primary-button" id="startOver">Analyse another photograph ↻</button></div>
+</section>
+
+<section class="how-section" id="how-it-works">
+ <div class="section-heading"><p class="eyebrow">✧ BEHIND THE EXPERIENCE ✧</p><h2>How PerfectHue works</h2><p>A thoughtful combination of facial landmark detection, colour analysis and personalised recommendations.</p></div>
+ <div class="steps-grid">
+  <article class="step-card"><span>01</span><h3>Upload</h3><p>Choose a clear photograph of your face.</p></article>
+  <article class="step-card"><span>02</span><h3>Analyse</h3><p>Facial landmarks help sample representative skin-colour regions.</p></article>
+  <article class="step-card"><span>03</span><h3>Discover</h3><p>Explore foundation shades closest to your detected skin colour.</p></article>
+ </div>
+</section>
+</main>
+<footer><a href="#home" class="footer-brand">PerfectHue ✧</a><p>Beauty is personal. Your shade should be too.</p><p class="copyright">© 2026 PerfectHue. Created with care by Michelle Paul.</p></footer>
+
+<!-- Browser libraries; no Flask server is required. -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+</body></html>
